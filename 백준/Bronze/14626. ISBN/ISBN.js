@@ -18,8 +18,6 @@ rl.on('close', () => {
   let star = 0
   let starWeight = 1
   let fullSum = 0
-  let first = 0
-  let check = Number(str[str.length - 1])
 
   for (let i = 0; i < 13; i++) {
     if (str[i] === "*") {
