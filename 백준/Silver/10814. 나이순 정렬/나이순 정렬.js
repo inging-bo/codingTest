@@ -26,21 +26,14 @@ rl.on('close', () => {
     if (ageA < ageB) {
       return -1
     }
-    if (ageA === ageB) {
-      if (signUpA > signUpB) {
-        return 1
-      }
-      if (signUpA < signUpB) {
-        return -1
-      }
-      return 0
-    }
     return 0
   })
 
+  let answer = []
   for (let i = 0; i < sort.length; i++) {
     const [signUpA, age, name]= sort[i]
-    console.log(age, name)
+    answer.push([age, name].join(" "))
   }
+  console.log(answer.join("\n"))
   
 });
