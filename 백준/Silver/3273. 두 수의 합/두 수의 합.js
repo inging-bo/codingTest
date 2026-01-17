@@ -13,14 +13,22 @@ rl.on('line', (line) => {
 
 rl.on('close', () => {
   const n = parseInt(stdin[0]);
-  const numbers = stdin[1].split(' ').map(Number);
+  const numbers = stdin[1].split(' ').map(Number).sort((a,b) => a - b);
   const x = parseInt(stdin[2]);
+  let [left, right] = [0, numbers.length - 1]
   let answer = 0
-  for (let i = 0; i < n; i++) {
-    for (let j = i + 1; j < n; j++) {
-      if (numbers[i] + numbers[j] === x) {
-        answer++
-      }
+  
+  while (left < right) {
+    if (numbers[left] + numbers[right] === x) {
+      answer += 1
+      left += 1
+      right -= 1
+    } 
+    if (numbers[left] + numbers[right] < x) {
+      left += 1
+    }
+    if (numbers[left] + numbers[right] > x) {
+      right -= 1
     }
   }
   console.log(answer)
