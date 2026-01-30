@@ -12,7 +12,7 @@ function solution(fees, records) {
         
         
         if (!isNaN(history[carNum])) {
-            console.log(history[carNum])
+            
             let curTime = hour * 60 + minute
             let inTime = history[carNum]
             parkingTimes[carNum] += curTime - inTime
