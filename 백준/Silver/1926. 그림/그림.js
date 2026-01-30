@@ -28,18 +28,17 @@ rl.on('close', () => {
   for (let i = 0; i < n; i++) {
     for (let j = 0; j < m; j++) {
       if (canvas[i][j] === 1 && !visit[i][j]) {
-        let count = 1
+        let count = 0
 
         function dfs(x, y) {
-          if (visit[x][y]) return
           visit[x][y] = 1
+          count++
           for (let i = 0; i < 4; i++) {
             let dirRow = x + dx[i]
             let dirCol = y + dy[i]
             if (dirRow < 0 || dirRow >= n || dirCol < 0 || dirCol >= m) continue
             
             if (canvas[dirRow][dirCol] === 1 && !visit[dirRow][dirCol]) {
-              count++
               dfs(dirRow, dirCol)
             }
           }
