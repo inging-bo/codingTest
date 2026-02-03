@@ -14,40 +14,35 @@ rl.on('line', (line) => {
 rl.on('close', () => {
   let answer = []
   for (let i = 0; i < stdin.length; i++) {
-    let curAnswer = []  
-    let j = stdin[i]
     
+    let j = stdin[i]
     let num = 1
+    
     while (j) {
       num *= 3
       j--
     }
-    
-    if (num === 1) {
-      answer.push("-") 
-      continue
-    } 
 
-    let line = Array.from({length : num}, () => " ")
+    let line = Array(num).fill("-")
     
-    recursion(1, num)
-    function recursion(start,last) {
-      if (last - start === 2) {
-        curAnswer.push(start)
-        curAnswer.push(last)
-        return
+    function recursion(start, len) {
+      if (len < 3) return
+
+      let three = len / 3
+
+      for (let i = start + three; i < start + 2 * three; i++) {
+        line[i] = " "
       }
-      
-      let rightDivide = (last - start + 1) / 3
-      
-      recursion(start, start + rightDivide - 1)
-      recursion(start + rightDivide * 2, last)
+
+      recursion(start, three)
+      recursion(start + three * 2, three)
       
     }
-    for (let i = 0; i < curAnswer.length; i++){
-      line[curAnswer[i] - 1] = "-"
-    }
+    
+    recursion(0, num)
+
     answer.push(line.join(""))
   }
+
   console.log(answer.join("\n"))
 });
