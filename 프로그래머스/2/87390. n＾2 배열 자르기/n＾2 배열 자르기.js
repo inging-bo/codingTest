@@ -1,7 +1,6 @@
 function solution(n, left, right) {
     
     let array = []
-    let count = 0
     
     for (let i = left; i <= right; i++) {
         let col = i % n
