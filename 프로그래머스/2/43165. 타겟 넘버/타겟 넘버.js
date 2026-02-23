@@ -1,20 +1,24 @@
 function solution(numbers, target) {
-  
+
   let answer = 0
-  dfs(0, 0)
-  function dfs(num, sum) {
+  let queue = []
+  queue.push([0,0])
+  let j = 0
+  while (queue.length > j) {
     
-    if (num === numbers.length) {
+    let [idx, sum] = queue[j]
+    if (idx === numbers.length) {
       if (sum === target) {
         answer++
       }
-      return
+      j++
+      continue
     }
-    
-    dfs(num + 1, sum + numbers[num])
-    dfs(num + 1, sum - numbers[num])
-    
+    queue.push([idx + 1, sum + numbers[idx]])
+    queue.push([idx + 1, sum - numbers[idx]])
+    j++
+
   }
-  
+
   return answer
 }
