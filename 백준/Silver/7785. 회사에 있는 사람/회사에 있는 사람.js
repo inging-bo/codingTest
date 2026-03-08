@@ -15,20 +15,16 @@ rl.on('close', () => {
   const n = parseInt(stdin[0]);
   const records = stdin.slice(1);
 
-  let obj = {}
+  let map = new Map()
   
   for (let i = 0; i < n; i++) {
     const [name, action] = records[i].split(' ');
-    if (obj[name]) {
-      delete obj[name]
+    if (action === 'enter') {
+      map.set(name, action)
     } else {
-      obj[name] = action
+      map.delete(name)
     }
   }
-  let answer = []
-  for (let [key, value] of Object.entries(obj)) {
-    answer.push(key)
-  }
-  console.log(answer.sort((a,b) => (a > b ? -1 : 1)).join("\n"))
+  console.log(Array.from(map.keys()).sort().reverse().join("\n"))
   
 });
