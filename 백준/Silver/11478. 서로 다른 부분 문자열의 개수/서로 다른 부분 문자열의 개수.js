@@ -13,16 +13,28 @@ rl.on('line', (line) => {
 
 rl.on('close', () => {
   const S = stdin[0];
-  let i = 1
-  let answer = 0
+const n = S.length;
 
-  let map = new Map()
-  while (i <= S.length) {
-    for (let j = 0; j + i <= S.length; j++) {
-      map.set(S.slice(j, j + i), 1)
-    }
+let suffixes = [];
+for (let i = 0; i < n; i++) {
+    suffixes.push(S.slice(i));
+}
+
+suffixes.sort();
+
+let totalSubstrings = (n * (n + 1)) / 2;
+
+let lcpSum = 0;
+for (let i = 1; i < n; i++) {
+    let prev = suffixes[i - 1];
+    let curr = suffixes[i];
+    let j = 0;
     
-    i++
-  }
-  console.log(map.size)
+    while (j < prev.length && j < curr.length && prev[j] === curr[j]) {
+        j++;
+    }
+    lcpSum += j;
+}
+
+console.log(totalSubstrings - lcpSum);
 });
